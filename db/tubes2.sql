@@ -320,9 +320,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `name`, `address`, `phoneNumber`, `email`, `username`, `password`, `level`, `pictureUser`, `statusNotif`) VALUES
-(17, 'a', 'a', '0', 'a@a.a', 'a', '0cc175b9c0f1b6a831c399e269772661', 'superadmin', 'default.png', 0),
-(18, 'Ariefad', 'Jl. Bandung', '080977745', 'ariefad@tiket.com', 'Ariefad', 'b21ffd3f5c8c9131de59d2545c3c6117', 'admin', 'default.png', 1),
-(20, 'Ariefus', 'Jl. Bandung', '080977756', 'ariefus@tiket.com', 'Ariefus', 'b83d05ffcdfe2694272bcc9947a13980', 'user', 'default.png', 1);
+(17, 'admin', 'jl. admin', '0', 'admin@admin.admin', 'admin', md5('P@SSW0RD'), 'superadmin', 'default.png', 0);
 
 --
 -- Indexes for dumped tables
