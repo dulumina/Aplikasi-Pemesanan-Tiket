@@ -27,9 +27,9 @@ COPY ./.docker/default.conf /etc/nginx/sites-enabled/default
 # script to run on startup
 COPY ./.docker/entrypoint.sh /etc/entrypoint.sh
 
-#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-#RUN composer install
+RUN composer install
 #RUN php artisan key:generate
 
 RUN chmod +x /etc/entrypoint.sh
