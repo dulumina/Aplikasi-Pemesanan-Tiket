@@ -90,7 +90,7 @@ class Order extends CI_Model {
             $this->db->select('idOrder',false);
             $this->db->order_by('idOrder', 'desc');
             $this->db->limit(1);
-            $query = $this->db->get('Order');
+            $query = $this->db->get('order');
             if($query->num_rows()<>0){
                 $data = $query->row();
                 $kode = intval($data->idOrder);
@@ -121,7 +121,7 @@ class Order extends CI_Model {
             $this->db->select('idOrder',false);
             $this->db->order_by('idOrder', 'desc');
             $this->db->limit(1);
-            $query = $this->db->get('Order');
+            $query = $this->db->get('order');
             if($query->num_rows()<>0){
                 $data = $query->row();
                 $kode = intval($data->idOrder);

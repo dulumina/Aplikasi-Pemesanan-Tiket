@@ -1,14 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends CI_Controller
+{
 
 	public function index()
-	{	
+	{
 		$session_data = $this->session->userdata('logged_in');
-		$data['username']=$session_data['username'];
-		$data['level']=$session_data['level'];
-		$data['id']=$session_data['id'];
+		$data['username'] = $session_data['username'];
+		$data['level'] = $session_data['level'];
+		$data['id'] = $session_data['id'];
 
 		$this->load->model('Notif');
 		$this->load->model('user');
@@ -16,7 +17,7 @@ class Welcome extends CI_Controller {
 
 		$id = $data['id'];
 		$user = $data['username'];
-		$data['name'] = $this->user->selectAll($id,$user);
+		$data['name'] = $this->user->selectAll($id, $user);
 		$data['notif'] = $this->Notif->notifikasi();
 		$data['countNotif'] = $this->Notif->count();
 		$data['countUser'] = $this->HomeAdmin->getCountUser();
@@ -25,32 +26,37 @@ class Welcome extends CI_Controller {
 		$data['recent'] = $this->HomeAdmin->recent();
 		$data['revenue'] = $this->HomeAdmin->revenue();
 		$data['sales'] = $this->HomeAdmin->revenue();
-
-
-
-		$this->load->view('admin/header',$data);
+		
+		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
-		$this->load->view('admin/index',$data);
-		$this->load->view('admin/footer2'); 
+		$this->load->view('admin/index', $data);
+		$this->load->view('admin/footer2');
 	}
 
-	public function update($id){
+	public function update($id)
+	{
 		$this->load->model('Notif');
 		$this->Notif->updateNotif($id);
-		redirect('Welcome','refresh');
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Diupdate',
+			'icon'	=> 'success'
+		]));
+		redirect('Welcome', 'refresh');
 	}
 
-	public function refresh(){
-	$this->load->model('Notif');
-    $data['notif'] = $this->Notif->notifikasi();
-	$data['countNotif'] = $this->Notif->count();
-	$this->load->view('admin/index',$data);
-  	}
+	public function refresh()
+	{
+		$this->load->model('Notif');
+		$data['notif'] = $this->Notif->notifikasi();
+		$data['countNotif'] = $this->Notif->count();
+		$this->load->view('admin/index', $data);
+	}
 
-  	public function recentOrder(){
-	$this->load->model('HomeAdmin');
-    
-	$this->load->view('admin/index',$data);
-  	}
+	public function recentOrder()
+	{
+		$this->load->model('HomeAdmin');
 
+		$this->load->view('admin/index', $data);
+	}
 }

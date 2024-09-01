@@ -49,9 +49,20 @@ class EventArtist extends CI_Controller {
             $this->load->library('upload', $config);
             if (! $this->upload->do_upload('pic')) {
                 $error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Error',
+					'text'	=> strip_tags($error['error']),
+					'icon'	=> 'error'
+				]));
+				redirect('EventArtist','refresh');
             } else {
                 $this->EventArtistModel->save();
-                echo "<script>alert('Successfully Created'); </script>";
+                // echo "<script>alert('Successfully Created'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Ditambahkan',
+					'icon'	=> 'success'
+				]));
                 redirect('EventArtist','refresh');
             }
         }
@@ -81,13 +92,23 @@ class EventArtist extends CI_Controller {
             $this->load->library('upload', $config);
             if (! $this->upload->do_upload('pic')) {
                 $this->EventArtistModel->updateno($id);
-                echo "<script>alert('Successfully Updated'); </script>";
+                // echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
                 redirect('EventArtist','refresh');
                 
             }else{
                 
                 $this->EventArtistModel->updateArtist($id);
-                echo "<script>alert('Successfully Updated'); </script>";
+                // echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
                 redirect('EventArtist','refresh');
         }
     }
@@ -98,6 +119,11 @@ class EventArtist extends CI_Controller {
         $this->load->model('EventArtistModel');
         //$id = $this->uri->segment(3);
         $this->EventArtistModel->deleteArtist($id);
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Dihapus',
+			'icon'	=> 'success'
+		]));
         redirect('EventArtist','refresh');
 
     }

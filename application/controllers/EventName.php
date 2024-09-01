@@ -52,7 +52,12 @@ class EventName extends CI_Controller {
 				$error = array('error' => $this->upload->display_errors());
 			} else {
 				$this->EventNameModel->save();
-				echo "<script>alert('Successfully Created'); </script>";
+				// echo "<script>alert('Successfully Created'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Ditambahkan',
+					'icon'	=> 'success'
+				]));
 				redirect('EventName','refresh');
 			}
 		}
@@ -82,13 +87,24 @@ class EventName extends CI_Controller {
 			$this->load->library('upload', $config);
 			if (! $this->upload->do_upload('pict')) {
 				$this->EventNameModel->updateno($id);
-				echo "<script>alert('Successfully Updated'); </script>";
+				// echo "<script>alert('Successfully Updated'); </script>";
+				
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
 				redirect('EventName','refresh');
 				
 			}else{
 				
 				$this->EventNameModel->updateName($id);
-				echo "<script>alert('Successfully Updated'); </script>";
+				// echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
 				redirect('EventName','refresh');
 		}
 	}
@@ -99,6 +115,11 @@ class EventName extends CI_Controller {
 		$this->load->model('EventNameModel');
 		//$id = $this->uri->segment(3);
 		$this->EventNameModel->deleteName($id);
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Dihapus',
+			'icon'	=> 'success'
+		]));
 		redirect('EventName','refresh');
 
 	}

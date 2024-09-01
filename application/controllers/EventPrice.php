@@ -1,19 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class EventPrice extends CI_Controller {
+class EventPrice extends CI_Controller
+{
 
 	public function byID($idSchedule)
 	{
-		$session_data=$this->session->userdata('logged_in');
-		$data['username']=$session_data['username'];
-		$data['level']=$session_data['level'];
-		$data['id']=$session_data['id'];
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$data['level'] = $session_data['level'];
+		$data['id'] = $session_data['id'];
 
 		$this->load->model('user');
 		$id = $data['id'];
 		$user = $data['username'];
-		$data['name'] = $this->user->selectAll($id,$user);
+		$data['name'] = $this->user->selectAll($id, $user);
 
 		$this->load->model('Notif');
 		$data['notif'] = $this->Notif->notifikasi();
@@ -26,23 +27,28 @@ class EventPrice extends CI_Controller {
 		$this->load->model('EventPriceModel');
 		$data['price_list'] = $this->EventPriceModel->getPriceById($idSchedule);
 		$data['seat'] = $this->EventPriceModel->getSeat($idSchedule);
-		$this->load->view('admin/header',$data);
-        $this->load->view('admin/sidebar');
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar');
 		$this->load->view('admin/priceEvent', $data);
-		$this->load->view('admin/footer'); 
+		$this->load->view('admin/footer');
 	}
 
 
 	public function create($idSchedule)
 	{
-		$this->load->helper('url','form');
+		$this->load->helper('url', 'form');
 		$this->load->model('EventScheduleModel');
 		$this->load->model('EventPriceModel');
 
 		$fkid = $this->input->post('seat');
-		$data['idSchedule'] = $idSchedule;		
-		$this->EventPriceModel->insertPrice($fkid,$idSchedule);
-		echo "<script>alert('Successfully Created'); </script>";
+		$data['idSchedule'] = $idSchedule;
+		$this->EventPriceModel->insertPrice($fkid, $idSchedule);
+		// echo "<script>alert('Successfully Created'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Ditambahkan',
+			'icon'	=> 'success'
+		]));
 		$this->byID($idSchedule);
 	}
 
@@ -55,22 +61,31 @@ class EventPrice extends CI_Controller {
 		$idPrice = $this->input->post('id');
 		$this->EventPriceModel->updateById($idPrice);
 		$data['schedule'] = $this->EventScheduleModel->getSchedule($idSchedule);
-			echo "<script>alert('Successfully Updated'); </script>";
-			$this->byID($idSchedule);
-			// redirect('EventPrice/byID/','refresh');
+		// echo "<script>alert('Successfully Updated'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Diubah',
+			'icon'	=> 'success'
+		]));
+		$this->byID($idSchedule);
+		// redirect('EventPrice/byID/','refresh');
 	}
 
-	public function deleteData($idSchedule,$idPrice)
+	public function deleteData($idSchedule, $idPrice)
 	{
 		$this->load->helper("url");
 		$this->load->model("EventPriceModel");
 		$this->load->model('EventScheduleModel');
 		$data['idSchedule'] = $idSchedule;
 		$this->EventPriceModel->delete($idPrice);
-		echo "<script>alert('Successfully Deleted'); </script>";
+		// echo "<script>alert('Successfully Deleted'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Dihapus',
+			'icon'	=> 'success'
+		]));
 		$this->byID($idSchedule);
 	}
-
 }
 
 

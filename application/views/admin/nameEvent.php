@@ -58,19 +58,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($eventname_list as $key){ ?>
-							<tr>
-							<td><?php echo $key->id ; ?></td>
-							<td><?php echo $key->name ; ?></td>
-							<td><?php echo $key->description ; ?></td>
-							<td><img src="<?php echo base_url();?>assets/imgEvent/<?php echo $key->pict;?>" class="img-thumbnail" width="50"></td>
-							<td>
-								<a href="javascript:void(0);" data-id="<?php echo $key->id ; ?>" data-name="<?php echo $key->name ; ?>" data-desc="<?php echo $key->description ; ?>" data-pict="<?php echo $key->pict ; ?>" data-toggle="modal" data-target="#edit-data">
-                            		<button  data-toggle="modal" data-target="#ubah-data" class="btn btn-secondary"><span class="fa fa-edit"></span></button></a>
-								<a href="<?php echo site_url()?>/EventName/delete/<?php echo $key->id; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this data permanently?'); "><span class="fa fa-trash"></span></a>
-							</td>
-							</tr>
-							<?php } ?>
+							<?php if(!empty($eventname_list)) : ?>
+								<?php foreach ($eventname_list as $key){ ?>
+								<tr>
+								<td><?php echo $key->id ; ?></td>
+								<td><?php echo $key->name ; ?></td>
+								<td><?php echo $key->description ; ?></td>
+								<td><img src="<?php echo base_url();?>assets/imgEvent/<?php echo $key->pict;?>" class="img-thumbnail" width="50"></td>
+								<td>
+									<a href="javascript:void(0);" data-id="<?php echo $key->id ; ?>" data-name="<?php echo $key->name ; ?>" data-desc="<?php echo $key->description ; ?>" data-pict="<?php echo $key->pict ; ?>" data-toggle="modal" data-target="#edit-data">
+																	<button  data-toggle="modal" data-target="#ubah-data" class="btn btn-secondary"><span class="fa fa-edit"></span></button></a>
+									<a href="<?php echo site_url()?>/EventName/delete/<?php echo $key->id; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this data permanently?'); "><span class="fa fa-trash"></span></a>
+								</td>
+								</tr>
+								<?php } ?>
+							<?php endif; ?>
 						</tbody>
 					</table>
 				</div>

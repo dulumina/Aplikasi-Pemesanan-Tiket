@@ -34,6 +34,11 @@ class Order extends CI_Controller
 	{
 		$this->load->model('OrderModel');
 		$this->OrderModel->updateStatus($idOrder);
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Diupdate',
+			'icon'	=> 'success'
+		]));
 		redirect('Order', 'refresh');
 	}
 
@@ -60,7 +65,12 @@ class Order extends CI_Controller
 			$this->load->view('user/ticketHistory', $data);
 			$this->load->view('user/footer', $data);
 		} else {
-			echo "<script>alert('You Must Login First'); </script>";
+			// echo "<script>alert('You Must Login First'); </script>";
+			$this->session->set_flashdata('alert', json_encode([
+				'title'	=> 'Warning',
+				'text'	=> 'You Must Login First',
+				'icon'	=> 'warning'
+			]));
 			redirect('Login', 'refresh');
 		}
 	}
@@ -89,7 +99,12 @@ class Order extends CI_Controller
 			$this->load->view('user/invoice', $data);
 			$this->load->view('user/footer', $data);
 		} else {
-			echo "<script>alert('You Must Login First'); </script>";
+			// echo "<script>alert('You Must Login First'); </script>";
+			$this->session->set_flashdata('alert', json_encode([
+				'title'	=> 'Warning',
+				'text'	=> 'You Must Login First',
+				'icon'	=> 'warning'
+			]));
 			redirect('Login', 'refresh');
 		}
 	}
@@ -115,10 +130,21 @@ class Order extends CI_Controller
 		$this->load->library('upload', $config);
 
 		if (! $this->upload->do_upload('pict')) {
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('alert', json_encode([
+				'title'	=> 'Error',
+				'text'	=> strip_tags($error['error']),
+				'icon'	=> 'error'
+			]));
 			redirect('Order/invoice', 'refresh');
 		} else {
 			$this->OrderModel->updatePic($id);
-			echo "<script>alert('Successfully Updated'); </script>";
+			// echo "<script>alert('Successfully Updated'); </script>";
+			$this->session->set_flashdata('alert', json_encode([
+				'title' => 'Success',
+				'text' => 'Data Berhasil Diubah',
+				'icon' => 'success'
+			]));
 			redirect('Order/invoice', 'refresh');
 		}
 	}

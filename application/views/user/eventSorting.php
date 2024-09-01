@@ -27,7 +27,7 @@
               <tr onclick="window.location='<?php echo site_url()?>/Search/detailEvent/<?php echo $key->idSchedule;?>'">
                 <th scope="row" style="background-color: #f4bd00" width="200px">
                   <!--<?php// $dates =  $key->date;
-                  $ubah //= date_format(new dateTime($dates),'d M Y');
+                  //$ubah //= date_format(new dateTime($dates),'d M Y');
 
                   ?> -->
 

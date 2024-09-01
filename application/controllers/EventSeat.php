@@ -1,19 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class EventSeat extends CI_Controller {
+class EventSeat extends CI_Controller
+{
 
 	public function byID($idVenue)
 	{
-		$session_data=$this->session->userdata('logged_in');
-		$data['username']=$session_data['username'];
-		$data['level']=$session_data['level'];
-		$data['id']=$session_data['id'];
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$data['level'] = $session_data['level'];
+		$data['id'] = $session_data['id'];
 
 		$this->load->model('user');
 		$id = $data['id'];
 		$user = $data['username'];
-		$data['name'] = $this->user->selectAll($id,$user);
+		$data['name'] = $this->user->selectAll($id, $user);
 
 		$this->load->model('Notif');
 		$data['notif'] = $this->Notif->notifikasi();
@@ -26,22 +27,26 @@ class EventSeat extends CI_Controller {
 		$this->load->model('EventSeatModel');
 		$data["seat_list"] = $this->EventSeatModel->getSeatById($idVenue);
 		$this->load->view('admin/header', $data);
-        $this->load->view('admin/sidebar');
+		$this->load->view('admin/sidebar');
 		$this->load->view('admin/seatEvent', $data);
-		$this->load->view('admin/footer'); 
+		$this->load->view('admin/footer');
 	}
 
 	public function create($idVenue)
 	{
-		$this->load->helper('url','form');
+		$this->load->helper('url', 'form');
 		$this->load->model('EventVenueModel');
 		$data['idVenue'] = $idVenue;
 		$data['venue'] = $this->EventVenueModel->getVenue($idVenue);
 		$this->load->model('EventSeatModel');
 		$this->EventSeatModel->insertSeat($idVenue);
-		echo "<script>alert('Successfully Created'); </script>";
+		// echo "<script>alert('Successfully Created'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Ditambahkan',
+			'icon'	=> 'success'
+		]));
 		$this->byID($idVenue);
-		
 	}
 
 	public function update($idVenue)
@@ -54,22 +59,30 @@ class EventSeat extends CI_Controller {
 		$data["seat_list"] = $this->EventSeatModel->getSeatById($idVenue);
 		$this->EventSeatModel->updateById($idSeat);
 		$data['venue'] = $this->EventVenueModel->getVenue($idVenue);
-		echo "<script>alert('Successfully Updated'); </script>";
+		// echo "<script>alert('Successfully Updated'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Diubah',
+			'icon'	=> 'success'
+		]));
 		$this->byID($idVenue);
 	}
 
-	public function deleteData($idVenue,$idSeat)
+	public function deleteData($idVenue, $idSeat)
 	{
 		$this->load->helper("url");
 		$this->load->model("EventSeatModel");
 		$this->EventSeatModel->delete($idSeat);
-		echo "<script>alert('Successfully Deleted'); </script>";
+		// echo "<script>alert('Successfully Deleted'); </script>";
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Dihapus',
+			'icon'	=> 'success'
+		]));
 		$data['idVenue'] = $idVenue;
 		$this->byID($idVenue);
 	}
-
 }
 
 /* End of file Jabatan.php */
 /* Location: ./application/controllers/Jabatan.php */
- ?>

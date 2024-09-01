@@ -49,7 +49,12 @@ class AdminDetail extends CI_Controller {
             }else{
                 
                 $this->InputAdminModel->updatePic($id);
-                echo "<script>alert('Successfully Updated'); </script>";
+                // echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
                 redirect('AdminDetail','refresh');
         	}
     	}
@@ -100,15 +105,25 @@ class AdminDetail extends CI_Controller {
                $this->InputAdminModel->updateNoPass($id);
                 $session_data['username'] = $this->input->post('username');
                 $data['username']=$session_data['username'];
-                 echo "<script>alert('Successfully Updated'); </script>";
-                 redirect('AdminDetail','refresh');
+                //  echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
+				redirect('AdminDetail','refresh');
             }else{
                $this->InputAdminModel->updateProfile($id);
                 $session_data['username'] = $this->input->post('username');
                 $session_data['password'] = MD5($this->input->post('password'));
                 $data['username']=$session_data['username'];
                 $data['password']=$session_data['password'];
-                  echo "<script>alert('Successfully Updated'); </script>";
+                //   echo "<script>alert('Successfully Updated'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Diubah',
+					'icon'	=> 'success'
+				]));
                  redirect('AdminDetail','refresh');
             }
         }

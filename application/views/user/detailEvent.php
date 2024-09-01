@@ -1,25 +1,3 @@
-<div id="myModal" class="modal yuhu" role="dialog">
-	<div class="modal-dialog1">
-		<?php echo form_open_multipart(''); ?>
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">The Number of Tickets You Want to Buy</h4>
-			</div>
-			<div class="modal-body">
-				<center>
-					<button name="subject" class="btn btn-lg btn-warning" type="submit" value="1" data>1 Ticket</button>
-					<button name="subject" class="btn btn-lg btn-warning" type="submit" value="2">2 Ticket</button>
-					<button name="subject" class="btn btn-lg btn-warning" type="submit" value="3">3 Ticket</button>
-					<button name="subject" class="btn btn-lg btn-warning" type="submit" value="4">4 Ticket</button>
-					<button name="subject" class="btn btn-lg btn-warning" type="submit" value="5">5 Ticket</button>
-				</center>
-			</div>
-		</div>
-		<?php echo form_close(); ?>
-	</div>
-</div>
-
-
 
 <section id="body" style="background-color: #fff; color: black">
 	<div class="container-fluid" style="padding-left: 10px; padding-right: 10px; padding-top: 30px;background-color:  #e8be04;">
@@ -141,7 +119,7 @@
 </section>
 
 <!-- Modal Tambah -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="show-data" class="modal fade-in">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="show-data" class="modal fade-in show">
 	<div class="modal-dialog" style="max-width: 900px; max-height: 500px">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -152,18 +130,9 @@
 					<div class="row">
 						<div class="col-4 scroll" style='overflow:auto;width:400px;height:500px;'>
 							<center><img src="<?php echo base_url() ?>/assets/imgEvent/<?php echo $search[0]->pict ?>" width="200px"></center><br>
-							<p align="justify" style="color: black">
-								MeetUp is a ticket search engine that makes finding tickets to live entertainment a cinch. With the largest ticket selection of any site on the web, we have <?php echo $search[0]->artist; ?> tickets for every fan at every price point. As most concert fans know, <?php echo $search[0]->artist; ?> puts on one of the best performances of any artist currently touring. Fans of pop music won't want to miss this show.
-
-								This concert takes place at <?php echo $search[0]->startTime; ?> p.m. It is smart to travel to the venue before this start time, however, in order to avoid missing any of the show. The venue will be open ahead of time so that attendees can find their seats, or if the event is general admission, find a good place to stand or sit.
-
-								<?php echo $search[0]->artist; ?> performance at <?php echo $search[0]->venue; ?> is sure to be memorable. This venue is known to be one of the best in <?php echo $search[0]->city; ?>, if not all of the <?php echo $search[0]->country; ?>. If you have never been to <?php echo $search[0]->venue; ?>, MeetUp’s "View from Seat Zone" feature offers a preview of what your view will look like prior to making a purchase!
-
-								<?php echo $search[0]->artist; ?> ticket prices can frequently change based on a number of factors, such as time of day, day of week, location, and more. If you see a price point that you are comfortable with right now, we recommend making a purchase while that ticket is still available.
-
-								Those seeking a better value should consider upper-level seating sections where tickets may be available at a lower price, while those looking for the best seat in the house should explore the lower levels and floor seating. The MeetUp event page shows all available tickets on the market, and fans can sort by either ticket price or our Deal Score feature to find their perfect seat.</p>
+							
 						</div>
-						<div class="col-2">
+						<div class="col-8">
 							<table class="table">
 								<thead class="thead-dark">
 									<tr>
@@ -225,6 +194,8 @@
 		document.getElementById(className).style.display = "block";
 		evt.currentTarget.className += " active";
 	}
+
+	$('#show-data').modal('show');
 </script>
 
 

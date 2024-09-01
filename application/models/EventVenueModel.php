@@ -23,7 +23,7 @@ class EventVenueModel extends CI_Model {
             'city'           => $this->input->post('city'),
             'country'           => $this->input->post('country')
         );
-        $this->db->insert('eventVenue',$data);
+        $this->db->insert('eventvenue',$data);
     } 
 
 

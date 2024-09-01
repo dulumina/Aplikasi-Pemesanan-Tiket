@@ -24,19 +24,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //  $dotenv->load();
 // };
 
-// $hook['post_controller_constructor'] = array(
-// 	'class'    => 'Auth',
-// 	'function' => 'check',
-// 	'filename' => 'Auth.php',
-// 	'filepath' => 'hooks'
-// );
-
-// $hook['pre_controller'] = function() {
-// 	// echo "test";
-// 	// die;
-// 	$CI =& get_instance();
-// 	$CI->load->library('acl');
-// 	if (property_exists($CI, 'acl')) {
-// 		$CI->acl->check();
-// 	}
-// };
+/**
+ * Authorization hook
+ */
+$hook['post_controller_constructor'] = array(
+	'class'    => 'Auth',
+	'function' => 'check',
+	'filename' => 'Auth.php',
+	'filepath' => 'hooks'
+);

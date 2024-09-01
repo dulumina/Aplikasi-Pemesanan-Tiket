@@ -71,7 +71,8 @@
 							<td>
 								<a href="<?php echo site_url()?>/Order/update/<?php echo $key->idOrder; ?>" class="btn btn-danger" >Confirm</a>
 							
-                                <a href="<?php echo base_url()?>/assets/imgEvent/<?php echo $key->gambar ?>" class="btn btn-info" target="_blank">Payment</a>
+                                <!-- <a href="<?php echo base_url()?>/assets/imgEvent/<?php echo $key->gambar ?>" class="btn btn-info" target="_blank">Payment</a> -->
+								 <a href="<?php echo base_url() ?>assets/imgEvent/<?php echo $key->gambar; ?>" class="btn btn-info" target="_blank">Payment</a>
                             </td>
 							</tr>
 							<?php } ?>

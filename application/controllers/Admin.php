@@ -63,6 +63,12 @@ class Admin extends CI_Controller {
         }else{
                 $this->InputAdminModel->save();
                 // echo "<script>alert('Successfully Created'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title'	=> 'Success',
+					'text'	=> 'Data Berhasil Ditambahkan',
+					'icon'	=> 'success'
+				]));
+
                 redirect('Admin','refresh');
         }
     }
@@ -72,6 +78,11 @@ class Admin extends CI_Controller {
         $this->load->model('InputAdminModel');
         //$id = $this->uri->segment(3);
         $this->InputAdminModel->deleteAdmin($id);
+		$this->session->set_flashdata('alert', json_encode([
+			'title'	=> 'Success',
+			'text'	=> 'Data Berhasil Dihapus',
+			'icon'	=> 'success'
+		]));
         redirect('Admin','refresh');
 
     }

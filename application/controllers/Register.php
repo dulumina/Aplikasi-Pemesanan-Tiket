@@ -26,7 +26,12 @@ class Register extends CI_Controller {
             $this->load->view('register');
         }else{
                 $this->User->insertUser();
-                echo "<script>alert('Successfully Created'); </script>";
+                // echo "<script>alert('Successfully Created'); </script>";
+				$this->session->set_flashdata('alert', json_encode([
+					'title' => 'Success',
+					'text' => 'Data Berhasil Ditambahkan',
+					'icon' => 'success'
+				]));
                 redirect('Login','refresh');
         }
      }

@@ -38,6 +38,18 @@ services:
       nofile: # Fix memory leak issue on some systems when LimitCORE=infinity (containerd)
         soft: 1048576
         hard: 1048576
+  
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: tiket-pma
+    restart: always
+    ports:
+      - 8084:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    depends_on:
+      - db
 
 # Names our volume
 volumes:
