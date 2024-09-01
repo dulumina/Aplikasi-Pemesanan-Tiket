@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'db',
-	'username' => 'tiket',
-	'password' => 'tiket',
-	'database' => 'tiket',
-	'dbdriver' => 'mysqli',
+	'hostname' => ($_ENV['DB_HOSTNAME']) ? $_ENV['DB_HOSTNAME'] : 'localhost',
+	'username' => ($_ENV['DB_USERNAME']) ? $_ENV['DB_USERNAME'] : 'tiket',
+	'password' => ($_ENV['DB_PASSWORD']) ? $_ENV['DB_PASSWORD'] : 'tiket',
+	'database' => ($_ENV['DB_DATABASE']) ? $_ENV['DB_DATABASE'] : 'tiket',
+	'dbdriver' => ($_ENV['DB_DRIVER']) ? $_ENV['DB_DRIVER'] : 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
